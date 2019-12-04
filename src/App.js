@@ -22,27 +22,49 @@ class App extends React.Component {
     super();
     this.state = {
       todo: todo,
-      anotherOne: '',
-      completed: false
+      anotherOne: ''
     };
   }
 
   addItem = userinput => {
     const newItem = {
       name: userinput,
-      id: Date.now()
+      id: Date.now(),
+      completed: false
     }
     this.setState({
       todo: [...this.state.todo, newItem]
     });
   };
 
+  toggleItem = itemId => {
+    this.setState({
+      todo: this.state.todo.map(item => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            completed: !item.completed
+          }
+        } else {
+          return item;
+        }
+      })
+    })
+  }
+
+  clearList = () => {
+    this.setState({
+      todo: this.state.todo.filter(todo => !todo.completed)
+    })
+  }
+
   render() {
     return (
       <MainDiv>
         <h1>A handy to-do list app!</h1>
         <TodoForm addItem={this.addItem} />
-        <TodoList todo={this.state.todo} />
+        <TodoList toggleItem={this.toggleItem} todo={this.state.todo} />
+        <button onClick={this.clearList}>Clear Completed</button>
       </MainDiv>
     );
   }

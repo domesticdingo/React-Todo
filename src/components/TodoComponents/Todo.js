@@ -16,6 +16,7 @@ const Todo = props => {
         <TodoDiv>
             <p>{props.item.name}</p>
             <p>Completed? {JSON.stringify(props.item.completed)}</p>
+            <button onClick={() => props.toggleItem(props.item.id)}>Toggle completed</button>
         </TodoDiv>
     )
 }

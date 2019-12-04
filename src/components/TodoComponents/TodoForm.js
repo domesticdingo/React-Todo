@@ -39,8 +39,6 @@ class TodoForm extends React.Component {
                 </FormGroup>
 
                 <Button type="submit">Add To-Do</Button>
-                
-                <Button>Clear completed</Button>
             </Form>
         )
     }
